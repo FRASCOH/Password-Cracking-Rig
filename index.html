@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entropy vs Length: Password Cracking Rig & Awareness Lab</title>
+    <meta name="description" content="Un progetto interattivo di cybersecurity che dimostra l'impatto dell'entropia rispetto alla lunghezza della password e i pericoli del riutilizzo delle credenziali.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background elements -->
+    <div class="cyber-grid"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">🛡️</span>
+                <span class="logo-text">CRACKING<br><small>LAB & AWARENESS</small></span>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-target="slide-intro" id="btn-intro">
+                    <span class="btn-num">01</span> Intro & Lab
+                </button>
+                <button class="nav-btn" data-target="slide-math" id="btn-math">
+                    <span class="btn-num">02</span> Lunghezza vs Complessità
+                </button>
+                <button class="nav-btn" data-target="slide-reuse" id="btn-reuse">
+                    <span class="btn-num">03</span> Riutilizzo Password
+                </button>
+                <button class="nav-btn" data-target="slide-mitigation" id="btn-mitigation">
+                    <span class="btn-num">04</span> Best Practices
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Progetto Portfolio GitHub</p>
+                <a href="https://github.com" target="_blank" class="github-link">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                        <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z"></path>
+                    </svg>
+                    <span>repository-link</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- SLIDE 1: INTRO & LAB OVERVIEW -->
+            <section id="slide-intro" class="slide active">
+                <div class="hero">
+                    <span class="badge">Cybersecurity Project</span>
+                    <h1>Entropy & Password Cracking Lab</h1>
+                    <p class="subtitle">Uno studio pratico sull'entropia delle password, l'uso di Hashcat nel cracking offline e l'effetto domino derivante dal riutilizzo delle credenziali.</p>
+                </div>
+
+                <div class="grid-2col">
+                    <div class="glass-card">
+                        <h3>🔬 Scopo del Laboratorio</h3>
+                        <p>Questo progetto mira a colmare il divario tra la teoria della sicurezza informatica e la consapevolezza degli utenti comuni. Attraverso l'uso di <strong>Hashcat</strong> in un ambiente controllato, abbiamo analizzato la reale resistenza delle chiavi di sicurezza moderne.</p>
+                        <div class="icon-list">
+                            <div class="icon-item">
+                                <span class="item-icon">⚙️</span>
+                                <div>
+                                    <strong>Cracking Rig Setup</strong>
+                                    <p>Configurazione e benchmark hardware (MD5 vs Bcrypt).</p>
+                                </div>
+                            </div>
+                            <div class="icon-item">
+                                <span class="item-icon">📊</span>
+                                <div>
+                                    <strong>Analisi Matematica</strong>
+                                    <p>Confronto diretto tra lunghezza delle stringhe e complessità dei caratteri.</p>
+                                </div>
+                            </div>
+                            <div class="icon-item">
+                                <span class="item-icon">⚠️</span>
+                                <div>
+                                    <strong>Simulazione di Minaccia</strong>
+                                    <p>Visualizzazione di attacchi di credential stuffing basati su leak reali.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card terminal-card">
+                        <div class="terminal-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span class="terminal-title">hashcat --benchmark</span>
+                        </div>
+                        <div class="terminal-body">
+                            <p class="t-comment"># Avvio benchmark Hashcat su GPU locale</p>
+                            <p><span class="t-cmd">hashcat</span> -b -m 0</p>
+                            <p class="t-output">Hashcat v6.2.6 starting in benchmark mode...</p>
+                            <p class="t-output">Device #1: Apple M3 Max (Metal API)</p>
+                            <p class="t-output">Hash-Mode 0 (MD5)</p>
+                            <p class="t-output-highlight">Speed.Dev.#1.....: 26.4 GH/s (26,400,000,000 hashes/sec)</p>
+                            <br>
+                            <p class="t-comment"># Avvio benchmark su algoritmo lento (Bcrypt)</p>
+                            <p><span class="t-cmd">hashcat</span> -b -m 3200</p>
+                            <p class="t-output">Hash-Mode 3200 (Bcrypt-PBKDF2-SHA256)</p>
+                            <p class="t-output-highlight">Speed.Dev.#1.....: 42.1 KH/s (42,100 hashes/sec)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 2: LUNGHEZZA VS COMPLESSITA -->
+            <section id="slide-math" class="slide">
+                <div class="section-header">
+                    <h2>02. Lunghezza vs Complessità</h2>
+                    <p>La matematica dell'entropia delle password. Perché una password lunga e semplice è infinitamente più sicura di una corta e complessa.</p>
+                </div>
+
+                <div class="grid-2col">
+                    <!-- Column 1: Interactive Calculator -->
+                    <div class="glass-card interactive-section">
+                        <h3>🔑 Calcolatore Interattivo di Forza & Entropia</h3>
+                        <p class="card-desc">Digita una password per calcolare l'entropia di Shannon e stimare il tempo di cracking su diversi canali di attacco.</p>
+                        
+                        <div class="form-group">
+                            <label for="pwd-input">Inserisci Password da Testare:</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="pwd-input" placeholder="Es: P@ssw0rd123 o gatto-dorme-sotto-il-sole" autocomplete="off">
+                                <button id="btn-clear" class="btn-secondary">Clear</button>
+                            </div>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-box">
+                                <span class="metric-label">Lunghezza</span>
+                                <span class="metric-val" id="val-len">0</span>
+                            </div>
+                            <div class="metric-box">
+                                <span class="metric-label">Spazio Caratteri (R)</span>
+                                <span class="metric-val" id="val-pool">0</span>
+                            </div>
+                            <div class="metric-box highlight">
+                                <span class="metric-label">Entropia (Bit)</span>
+                                <span class="metric-val" id="val-entropy">0</span>
+                            </div>
+                        </div>
+
+                        <div class="entropy-bar-container">
+                            <div class="entropy-label-row">
+                                <span>Livello di Entropia</span>
+                                <span id="entropy-desc">Nessuna Password</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" id="entropy-progress" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Results & Comparison -->
+                    <div class="glass-card results-section">
+                        <h3>⏱️ Tempi di Cracking Stimati</h3>
+                        
+                        <div class="time-estimate-row">
+                            <div class="time-icon">🌐</div>
+                            <div class="time-details">
+                                <strong>Attacco Online (Rate-Limited)</strong>
+                                <span class="time-desc">Es. Tentativi su portale web (100 tentativi/sec)</span>
+                            </div>
+                            <div class="time-val" id="time-online">N/A</div>
+                        </div>
+
+                        <div class="time-estimate-row fast-hash">
+                            <div class="time-icon">⚡</div>
+                            <div class="time-details">
+                                <strong>Attacco Offline Rapido (MD5)</strong>
+                                <span class="time-desc">Database violato, algoritmo obsoleto (100 GH/s GPU)</span>
+                            </div>
+                            <div class="time-val" id="time-offline-fast">N/A</div>
+                        </div>
+
+                        <div class="time-estimate-row slow-hash">
+                            <div class="time-icon">🐢</div>
+                            <div class="time-details">
+                                <strong>Attacco Offline Lento (Bcrypt)</strong>
+                                <span class="time-desc">Database protetto da Bcrypt Work Factor 10 (100 KH/s)</span>
+                            </div>
+                            <div class="time-val" id="time-offline-slow">N/A</div>
+                        </div>
+
+                        <!-- Comparison Widget -->
+                        <div class="comparison-widget">
+                            <h4>Confronto Diretto:</h4>
+                            <div class="comp-bars">
+                                <div class="comp-bar-item">
+                                    <div class="comp-label">
+                                        <strong>P@ssw0rd1!</strong> <small>(9 car. complessi)</small>
+                                    </div>
+                                    <div class="comp-bar-bg">
+                                        <div class="comp-bar-fill val-short" style="width: 35%">56.8 Bit</div>
+                                    </div>
+                                    <span class="comp-time">Offline Fast: ~5.6 ore</span>
+                                </div>
+                                <div class="comp-bar-item">
+                                    <div class="comp-label">
+                                        <strong>sole-gatto-albero-cielo</strong> <small>(23 car. semplici)</small>
+                                    </div>
+                                    <div class="comp-bar-bg">
+                                        <div class="comp-bar-fill val-long" style="width: 100%">108 Bit</div>
+                                    </div>
+                                    <span class="comp-time">Offline Fast: ~51 Milioni di Anni</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 3: RIUTILIZZO PASSWORD -->
+            <section id="slide-reuse" class="slide">
+                <div class="section-header">
+                    <h2>03. Il Pericolo Catastrofico del Riutilizzo</h2>
+                    <p>Come una singola violazione su un sito web minore compromette l'intera identità digitale della vittima attraverso attacchi di <strong>Credential Stuffing</strong>.</p>
+                </div>
+
+                <div class="glass-card simulator-container">
+                    <div class="sim-header">
+                        <h3>Simulatore dell'Effetto Domino di una Password Leak</h3>
+                        <button class="btn-primary" id="btn-simulate">Avvia Simulazione Attacco</button>
+                    </div>
+
+                    <!-- Interactive Attack Diagram Flow -->
+                    <div class="attack-flow">
+                        <!-- Step 1 -->
+                        <div class="flow-node active" id="node-1">
+                            <div class="node-icon">🎮</div>
+                            <h4>1. Il Leak Iniziale</h4>
+                            <p class="node-site">forum-gaming-locale.it</p>
+                            <div class="node-status text-warning">Password: Summer2026!</div>
+                            <div class="node-details">Database violato. L'hash MD5 viene craccato offline in 0.4 secondi usando una lista standard.</div>
+                        </div>
+
+                        <!-- Connector 1 -->
+                        <div class="flow-connector" id="conn-1">
+                            <div class="connector-line"></div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="flow-node" id="node-2">
+                            <div class="node-icon">🤖</div>
+                            <h4>2. Credential Stuffing</h4>
+                            <p class="node-site">Botnet Attacker Script</p>
+                            <div class="node-status" id="status-node2">In attesa...</div>
+                            <div class="node-details">I bot provano automaticamente le credenziali rubate (email + password) su centinaia di portali popolari.</div>
+                        </div>
+
+                        <!-- Connectors to target apps -->
+                        <div class="flow-branch-container" id="conn-branch">
+                            <div class="branch-line left"></div>
+                            <div class="branch-line center"></div>
+                            <div class="branch-line right"></div>
+                        </div>
+
+                        <!-- Target Systems Row -->
+                        <div class="targets-row">
+                            <!-- Gmail -->
+                            <div class="flow-node target-node" id="node-target-gmail">
+                                <div class="node-icon">✉️</div>
+                                <h4>Email Personale</h4>
+                                <p class="node-site">Gmail / Yahoo</p>
+                                <div class="node-status">Protetto</div>
+                            </div>
+                            <!-- Bank -->
+                            <div class="flow-node target-node" id="node-target-bank">
+                                <div class="node-icon">💰</div>
+                                <h4>Conto Bancario</h4>
+                                <p class="node-site">Home Banking</p>
+                                <div class="node-status">Protetto</div>
+                            </div>
+                            <!-- Work -->
+                            <div class="flow-node target-node" id="node-target-work">
+                                <div class="node-icon">🏢</div>
+                                <h4>Rete Aziendale</h4>
+                                <p class="node-site">Slack & VPN Aziendale</p>
+                                <div class="node-status">Protetto</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Simulated log output console -->
+                    <div class="terminal-card text-left mt-20">
+                        <div class="terminal-header">
+                            <span class="terminal-title">Attack Simulation Log</span>
+                        </div>
+                        <div class="terminal-body console-body" id="sim-console">
+                            <p class="t-comment">// Clicca su "Avvia Simulazione Attacco" in alto per iniziare...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 4: MITIGATION & BEST PRACTICES -->
+            <section id="slide-mitigation" class="slide">
+                <div class="section-header">
+                    <h2>04. Linee Guida per la Sicurezza</h2>
+                    <p>Presentazione di sensibilizzazione per team aziendali o uso personale. Regole d'oro per fermare gli attacchi basati su credenziali.</p>
+                </div>
+
+                <div class="grid-3col">
+                    <div class="glass-card action-card">
+                        <div class="action-icon">🔑</div>
+                        <h3>Adotta un Password Manager</h3>
+                        <p>Gli esseri umani non possono memorizzare dozzine di password lunghe e uniche. Un password manager (Bitwarden, KeepassXC, 1Password):</p>
+                        <ul>
+                            <li>Genera chiavi ad alta entropia.</li>
+                            <li>Previene il phishing compilando solo sui domini corretti.</li>
+                            <li>Elimina totalmente il problema del riutilizzo.</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card action-card">
+                        <div class="action-icon">📏</div>
+                        <h3>Passphrase > Password Corte</h3>
+                        <p>Invece di sforzarti a ricordare sequenze complesse come <code>P@$$w0rd!</code>, usa combinazioni di parole casuali lunghe:</p>
+                        <ul>
+                            <li><strong>Esempio:</strong> <code>caffettiera-foglia-treno-gatto</code></li>
+                            <li>Facile da digitare e memorizzare.</li>
+                            <li>Resistenza astronomica ad attacchi brute force offline.</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card action-card">
+                        <div class="action-icon">🛡️</div>
+                        <h3>Attiva MFA (Multi-Factor)</h3>
+                        <p>Anche se una password viene compromessa tramite leak o phishing, l'autenticazione a due fattori blocca l'accesso non autorizzato:</p>
+                        <ul>
+                            <li>Usa app authenticator (TOTP) o chiavi hardware (YubiKey).</li>
+                            <li>Evita gli SMS (vulnerabili a SIM swapping).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Call to action box -->
+                <div class="glass-card cta-box text-center mt-30">
+                    <h3>📢 Condividi questa Presentazione di Sensibilizzazione</h3>
+                    <p>Puoi caricare questo progetto su GitHub Pages per usarlo durante sessioni di formazione interna o come pezzo forte del tuo portfolio professionale.</p>
+                    <div class="cta-actions">
+                        <a href="lab_guide.md" class="btn-primary">Leggi la Guida Tecnica di Laboratorio</a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- JS Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
