@@ -1,5 +1,8 @@
 # Entropy vs. Length: Password Cracking Lab & Awareness Presentation
 
+**Autore:** Lorenzo Frasconi  
+**Repository GitHub:** [FRASCOH/Password-Cracking-Rig](https://github.com/FRASCOH/Password-Cracking-Rig)
+
 A comprehensive cybersecurity project designed to analyze password strength, compare the computational impact of **length vs. complexity**, demonstrate the risk of **password reuse**, and convert these findings into an interactive, visually stunning security awareness presentation.
 
 ---
