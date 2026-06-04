@@ -331,4 +331,84 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     btnSimulate.addEventListener('click', runSimulation);
+
+    // --- INTERACTIVE GLOSSARY POPUPS ---
+    const glossaryDb = {
+        'hashcat': {
+            title: 'Hashcat',
+            desc: 'Hashcat è uno dei software di password recovery e cracking offline più veloci e utilizzati al mondo. Sfrutta la potenza di calcolo parallela delle GPU per calcolare miliardi di hash al secondo, supportando attacchi a dizionario, brute force e regole di mutazione complesse.'
+        },
+        'entropy': {
+            title: 'Forza & Entropia (Shannon)',
+            desc: 'L\'entropia delle password (misurata in Bit) definisce la casualità matematica di una chiave. Più l\'entropia è alta, maggiore è il numero di combinazioni che un software di cracking deve testare per indovinarla. La formula dipende direttamente dalla lunghezza e dallo spazio dei caratteri scelti.'
+        },
+        'online-attack': {
+            title: 'Attacco Online (Rate-Limited)',
+            desc: 'Un attacco condotto direttamente contro un portale web. È limitato dalla velocità del server, dalla latenza di rete e da protezioni come il blocco dell\'account dopo 3-5 tentativi errati (rate-limiting), rendendo il cracking estremamente lento.'
+        },
+        'offline-fast': {
+            title: 'Attacco Offline Rapido (MD5)',
+            desc: 'Avviene quando un attaccante ruba il database cifrato e cracca gli hash localmente. Con algoritmi legacy non sicuri come MD5 o SHA-1, le moderne GPU possono testare centinaia di miliardi di combinazioni al secondo.'
+        },
+        'offline-slow': {
+            title: 'Attacco Offline Lento (Bcrypt)',
+            desc: 'Avviene quando il database rubato è protetto da algoritmi moderni e lenti (come Bcrypt o Argon2). Questi algoritmi forzano la CPU/GPU dell\'attaccante ad eseguire calcoli complessi ad ogni tentativo, riducendo le velocità di crack da miliardi a sole poche migliaia al secondo.'
+        },
+        'leak': {
+            title: 'Password Leak / Data Breach',
+            desc: 'L\'esposizione pubblica di credenziali precedentemente rubate da un database compromesso. Queste password finiscono in wordlist globali utilizzate dagli attaccanti per attacchi mirati.'
+        },
+        'stuffing': {
+            title: 'Credential Stuffing',
+            desc: 'Un attacco automatizzato in cui i bot utilizzano liste di e-mail e password violate da un sito (leak) per accedere abusivamente ad altri portali (social, banche, email), sfruttando l\'abitudine diffusa di riutilizzare la stessa password.'
+        },
+        'manager': {
+            title: 'Password Manager',
+            desc: 'Un software (come Keepass, Bitwarden o 1Password) che genera e memorizza password lunghe e uniche per ogni account all\'interno di un database cifrato. L\'utente deve ricordare solo una singola Master Password.'
+        },
+        'passphrase': {
+            title: 'Passphrase',
+            desc: 'Una password composta da una sequenza di parole casuali (es: "treno-foglia-cielo-gatto"). Raggiunge una lunghezza elevatissima (facile da ricordare ma con entropia enorme), bloccando di fatto gli attacchi brute-force.'
+        },
+        'mfa': {
+            title: 'MFA (Multi-Factor Authentication)',
+            desc: 'Un sistema di sicurezza che richiede due o più prove di identità prima di concedere l\'accesso (es: Password + codice temporaneo OTP su smartphone). Impedisce l\'intrusione anche se la password viene craccata.'
+        }
+    };
+
+    const glossaryModal = document.getElementById('glossary-modal');
+    const modalTitle = document.getElementById('modal-term-title');
+    const modalDesc = document.getElementById('modal-term-desc');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+
+    document.querySelectorAll('.glossary-term').forEach(term => {
+        term.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const termId = term.getAttribute('data-term');
+            const data = glossaryDb[termId];
+            if (data) {
+                modalTitle.textContent = data.title;
+                modalDesc.textContent = data.desc;
+                glossaryModal.style.display = 'flex';
+            }
+        });
+    });
+
+    // Close Modal Functions
+    function closeModal() {
+        glossaryModal.style.display = 'none';
+    }
+
+    modalCloseBtn.addEventListener('click', closeModal);
+    glossaryModal.addEventListener('click', (e) => {
+        if (e.target === glossaryModal) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && glossaryModal.style.display === 'flex') {
+            closeModal();
+        }
+    });
 });

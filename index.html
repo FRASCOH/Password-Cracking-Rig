@@ -64,7 +64,7 @@
                 <div class="grid-2col">
                     <div class="glass-card">
                         <h3>🔬 Scopo del Laboratorio</h3>
-                        <p>Questo progetto mira a colmare il divario tra la teoria della sicurezza informatica e la consapevolezza degli utenti comuni. Attraverso l'uso di <strong>Hashcat</strong> in un ambiente controllato, abbiamo analizzato la reale resistenza delle chiavi di sicurezza moderne.</p>
+                        <p>Questo progetto mira a colmare il divario tra la teoria della sicurezza informatica e la consapevolezza degli utenti comuni. Attraverso l'uso di <span class="glossary-term" data-term="hashcat"><strong>Hashcat</strong></span> in un ambiente controllato, abbiamo analizzato la reale resistenza delle chiavi di sicurezza moderne.</p>
                         <div class="icon-list">
                             <div class="icon-item">
                                 <span class="item-icon">⚙️</span>
@@ -124,7 +124,7 @@
                 <div class="grid-2col">
                     <!-- Column 1: Interactive Calculator -->
                     <div class="glass-card interactive-section">
-                        <h3>🔑 Calcolatore Interattivo di Forza & Entropia</h3>
+                        <h3>🔑 Calcolatore Interattivo di <span class="glossary-term" data-term="entropy">Forza & Entropia</span></h3>
                         <p class="card-desc">Digita una password per calcolare l'entropia di Shannon e stimare il tempo di cracking su diversi canali di attacco.</p>
                         
                         <div class="form-group">
@@ -173,7 +173,7 @@
                         <div class="time-estimate-row">
                             <div class="time-icon">🌐</div>
                             <div class="time-details">
-                                <strong>Attacco Online (Rate-Limited)</strong>
+                                <strong><span class="glossary-term" data-term="online-attack">Attacco Online (Rate-Limited)</span></strong>
                                 <span class="time-desc">Es. Tentativi su portale web (100 tentativi/sec)</span>
                             </div>
                             <div class="time-val" id="time-online">N/A</div>
@@ -182,7 +182,7 @@
                         <div class="time-estimate-row fast-hash">
                             <div class="time-icon">⚡</div>
                             <div class="time-details">
-                                <strong>Attacco Offline Rapido (MD5)</strong>
+                                <strong><span class="glossary-term" data-term="offline-fast">Attacco Offline Rapido (MD5)</span></strong>
                                 <span class="time-desc">Database violato, algoritmo obsoleto (100 GH/s GPU)</span>
                             </div>
                             <div class="time-val" id="time-offline-fast">N/A</div>
@@ -191,7 +191,7 @@
                         <div class="time-estimate-row slow-hash">
                             <div class="time-icon">🐢</div>
                             <div class="time-details">
-                                <strong>Attacco Offline Lento (Bcrypt)</strong>
+                                <strong><span class="glossary-term" data-term="offline-slow">Attacco Offline Lento (Bcrypt)</span></strong>
                                 <span class="time-desc">Database protetto da Bcrypt Work Factor 10 (100 KH/s)</span>
                             </div>
                             <div class="time-val" id="time-offline-slow">N/A</div>
@@ -228,12 +228,12 @@
             <section id="slide-reuse" class="slide">
                 <div class="section-header">
                     <h2>03. Il Pericolo Catastrofico del Riutilizzo</h2>
-                    <p>Come una singola violazione su un sito web minore compromette l'intera identità digitale della vittima attraverso attacchi di <strong>Credential Stuffing</strong>.</p>
+                    <p>Come una singola violazione su un sito web minore compromette l'intera identità digitale della vittima attraverso attacchi di <span class="glossary-term" data-term="stuffing"><strong>Credential Stuffing</strong></span>.</p>
                 </div>
 
                 <div class="glass-card simulator-container">
                     <div class="sim-header">
-                        <h3>Simulatore dell'Effetto Domino di una Password Leak</h3>
+                        <h3>Simulatore dell'Effetto Domino di una <span class="glossary-term" data-term="leak">Password Leak</span></h3>
                         <button class="btn-primary" id="btn-simulate">Avvia Simulazione Attacco</button>
                     </div>
 
@@ -256,7 +256,7 @@
                         <!-- Step 2 -->
                         <div class="flow-node" id="node-2">
                             <div class="node-icon">🤖</div>
-                            <h4>2. Credential Stuffing</h4>
+                            <h4>2. <span class="glossary-term" data-term="stuffing">Credential Stuffing</span></h4>
                             <p class="node-site">Botnet Attacker Script</p>
                             <div class="node-status" id="status-node2">In attesa...</div>
                             <div class="node-details">I bot provano automaticamente le credenziali rubate (email + password) su centinaia di portali popolari.</div>
@@ -317,7 +317,7 @@
                 <div class="grid-3col">
                     <div class="glass-card action-card">
                         <div class="action-icon">🔑</div>
-                        <h3>Adotta un Password Manager</h3>
+                        <h3>Adotta un <span class="glossary-term" data-term="manager">Password Manager</span></h3>
                         <p>Gli esseri umani non possono memorizzare dozzine di password lunghe e uniche. Un password manager (Bitwarden, KeepassXC, 1Password):</p>
                         <ul>
                             <li>Genera chiavi ad alta entropia.</li>
@@ -328,8 +328,8 @@
 
                     <div class="glass-card action-card">
                         <div class="action-icon">📏</div>
-                        <h3>Passphrase > Password Corte</h3>
-                        <p>Invece di sforzarti a ricordare sequenze complesse come <code>P@$$w0rd!</code>, usa combinazioni di parole casuali lunghe:</p>
+                        <h3><span class="glossary-term" data-term="passphrase">Passphrase</span> &gt; Password Corte</h3>
+                        <p>Invece di sforzarti a ricordare sequenze complesse come <code>P@$$w0rd!</code>, usa combinazioni di parole casuali lung:</p>
                         <ul>
                             <li><strong>Esempio:</strong> <code>caffettiera-foglia-treno-gatto</code></li>
                             <li>Facile da digitare e memorizzare.</li>
@@ -339,7 +339,7 @@
 
                     <div class="glass-card action-card">
                         <div class="action-icon">🛡️</div>
-                        <h3>Attiva MFA (Multi-Factor)</h3>
+                        <h3>Attiva <span class="glossary-term" data-term="mfa">MFA (Multi-Factor)</span></h3>
                         <p>Anche se una password viene compromessa tramite leak o phishing, l'autenticazione a due fattori blocca l'accesso non autorizzato:</p>
                         <ul>
                             <li>Usa app authenticator (TOTP) o chiavi hardware (YubiKey).</li>
@@ -359,6 +359,19 @@
             </section>
 
         </main>
+    </div>
+
+    <!-- Glossary Modal Container -->
+    <div class="modal-overlay" id="glossary-modal" style="display: none;">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h3 id="modal-term-title">Termine Tecnico</h3>
+                <button class="modal-close" id="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-term-desc">
+                Definizione del termine.
+            </div>
+        </div>
     </div>
 
     <!-- JS Scripts -->
