@@ -211,113 +211,12 @@ document.addEventListener('DOMContentLoaded', () => {
         timeOnline.textContent = formatTime(avgAttempts / onlineSpeed);
         timeOfflineFast.textContent = formatTime(avgAttempts / offlineFastSpeed);
         timeOfflineSlow.textContent = formatTime(avgAttempts / offlineSlowSpeed);
-
-        // Update Chart User Marker
-        if (typeof entropyChart !== 'undefined' && entropyChart) {
-            if (length >= 4) {
-                entropyChart.data.datasets[4].data = [{ x: length, y: parseFloat(entropy.toFixed(1)) }];
-            } else {
-                entropyChart.data.datasets[4].data = [];
-            }
-            entropyChart.update();
-        }
     }
 
     pwdInput.addEventListener('input', updateCalculator);
     btnClear.addEventListener('click', () => {
         pwdInput.value = '';
         updateCalculator();
-    });
-
-    // --- COMPARISON CHART (Chart.js) ---
-    const ctx = document.getElementById('entropy-chart').getContext('2d');
-    const lengths = Array.from({length: 13}, (_, i) => i + 6); // 6 to 18
-
-    const numericData = lengths.map(l => l * Math.log2(10));
-    const lowercaseData = lengths.map(l => l * Math.log2(26));
-    const alphanumericData = lengths.map(l => l * Math.log2(62));
-    const fullSymbolsData = lengths.map(l => l * Math.log2(94));
-
-    const entropyChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: lengths,
-            datasets: [
-                {
-                    label: 'Numeri (10)',
-                    data: numericData,
-                    borderColor: '#ff1744',
-                    borderWidth: 2,
-                    fill: false,
-                    pointRadius: 0
-                },
-                {
-                    label: 'Minuscole (26)',
-                    data: lowercaseData,
-                    borderColor: '#ffd600',
-                    borderWidth: 2,
-                    fill: false,
-                    pointRadius: 0
-                },
-                {
-                    label: 'Alfanumerico (62)',
-                    data: alphanumericData,
-                    borderColor: '#00e676',
-                    borderWidth: 2,
-                    fill: false,
-                    pointRadius: 0
-                },
-                {
-                    label: 'Completo (94)',
-                    data: fullSymbolsData,
-                    borderColor: '#d500f9',
-                    borderWidth: 2,
-                    fill: false,
-                    pointRadius: 0
-                },
-                {
-                    label: 'Tua Password',
-                    data: [],
-                    borderColor: '#00e5ff',
-                    backgroundColor: '#00e5ff',
-                    pointRadius: 8,
-                    pointHoverRadius: 10,
-                    showLine: false,
-                    fill: false,
-                    type: 'scatter'
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        color: '#8a99ad',
-                        font: { family: 'Plus Jakarta Sans', size: 10 }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    type: 'linear',
-                    title: { display: true, text: 'Lunghezza Password', color: '#8a99ad' },
-                    grid: { color: 'rgba(255,255,255,0.05)' },
-                    ticks: { color: '#8a99ad', stepSize: 2 },
-                    min: 6,
-                    max: 18
-                },
-                y: {
-                    title: { display: true, text: 'Entropia (Bit)', color: '#8a99ad' },
-                    grid: { color: 'rgba(255,255,255,0.05)' },
-                    ticks: { color: '#8a99ad' },
-                    min: 0,
-                    max: 120
-                }
-            }
-        }
     });
 
     // Initialize Calculator with empty state
