@@ -86,6 +86,8 @@ body {
 /* Sidebar Navigation */
 .sidebar {
     width: 300px;
+    min-width: 300px;
+    flex-shrink: 0;
     background: rgba(10, 12, 16, 0.85);
     border-right: 1px solid var(--border-color);
     padding: 40px 24px;
