@@ -84,6 +84,67 @@ document.addEventListener('DOMContentLoaded', () => {
         return "Istantaneo";
     }
 
+    const hibpAlert = document.getElementById('hibp-alert');
+    const hibpMessage = document.getElementById('hibp-message');
+    const hibpBadge = document.querySelector('.hibp-badge');
+    let hibpTimeout = null;
+
+    async function hashSHA1(str) {
+        const buffer = new TextEncoder().encode(str);
+        const hash = await crypto.subtle.digest("SHA-1", buffer);
+        return Array.from(new Uint8Array(hash))
+            .map(b => b.toString(16).padStart(2, "0"))
+            .join("")
+            .toUpperCase();
+    }
+
+    async function checkHIBP(password) {
+        if (!password) {
+            hibpAlert.style.display = 'none';
+            return;
+        }
+
+        try {
+            const hash = await hashSHA1(password);
+            const prefix = hash.slice(0, 5);
+            const suffix = hash.slice(5);
+
+            const response = await fetch(`https://api.pwnedpasswords.com/range/${prefix}`);
+            if (!response.ok) throw new Error('API HIBP non disponibile');
+
+            const text = await response.text();
+            const lines = text.split('\n');
+            let matchCount = 0;
+
+            for (const line of lines) {
+                const [lineSuffix, count] = line.trim().split(':');
+                if (lineSuffix === suffix) {
+                    matchCount = parseInt(count, 10);
+                    break;
+                }
+            }
+
+            if (matchCount > 0) {
+                hibpBadge.textContent = `⚠️ Compromessa`;
+                hibpBadge.style.backgroundColor = 'var(--text-danger)';
+                hibpMessage.textContent = `Questa password è stata esposta ${matchCount.toLocaleString()} volte in leak pubblici! Sconsigliato l'uso.`;
+                hibpAlert.style.display = 'flex';
+                hibpAlert.style.background = 'rgba(255, 23, 68, 0.08)';
+                hibpAlert.style.borderColor = 'var(--text-danger)';
+            } else {
+                hibpBadge.textContent = `✔️ Sicura`;
+                hibpBadge.style.backgroundColor = 'var(--text-success)';
+                hibpMessage.textContent = `Nessuna compromissione nota trovata nei database dei leak pubblici.`;
+                hibpAlert.style.display = 'flex';
+                hibpAlert.style.background = 'rgba(0, 230, 118, 0.08)';
+                hibpAlert.style.borderColor = 'var(--text-success)';
+            }
+        } catch (error) {
+            console.error(error);
+            hibpAlert.style.display = 'none';
+        }
+    }
+
     function updateCalculator() {
         const password = pwdInput.value;
         const length = password.length;
@@ -121,6 +182,16 @@ document.addEventListener('DOMContentLoaded', () => {
         entropyDesc.textContent = description;
         entropyProgress.style.width = `${pct}%`;
         entropyProgress.style.backgroundColor = barColor;
+
+        // Debounce HIBP checking
+        clearTimeout(hibpTimeout);
+        if (length > 0) {
+            hibpTimeout = setTimeout(() => {
+                checkHIBP(password);
+            }, 500);
+        } else {
+            hibpAlert.style.display = 'none';
+        }
 
         // Cracking times estimation
         if (length === 0) {

@@ -908,3 +908,30 @@ h1 {
         grid-template-columns: 1fr;
     }
 }
+
+/* HIBP Alert Container */
+.hibp-alert-container {
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: 12px;
+    background: rgba(255, 23, 68, 0.08);
+    border: 1px solid var(--text-danger);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-main);
+    animation: fadeIn 0.3s ease;
+}
+
+.hibp-badge {
+    background: var(--text-danger);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
